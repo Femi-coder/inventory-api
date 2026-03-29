@@ -36,11 +36,12 @@ pipeline {
     }
 }
 
-        stage('Create Zip') {
-            steps {
-                bat '''
-                powershell Compress-Archive -Path * -DestinationPath "complete-%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%.zip"
-        '''
+       stage('Create Zip') {
+    steps {
+        script {
+            def timestamp = new Date().format("yyyy-MM-dd_HH-mm-ss")
+            bat "powershell Compress-Archive -Path * -DestinationPath complete-${timestamp}.zip"
+        }
     }
 }
     }
