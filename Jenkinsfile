@@ -9,10 +9,10 @@ pipeline {
             }
         }
 
-        stage('Clean Old Containers') {
+       stage('Clean Old Containers') {
             steps {
-                bat 'for /f "tokens=*" %i in (\'docker ps -q\') do docker stop %i'
-                bat 'for /f "tokens=*" %i in (\'docker ps -aq\') do docker rm %i'
+                bat 'for /f "tokens=*" %%i in (\'docker ps -q\') do docker stop %%i'
+                bat 'for /f "tokens=*" %%i in (\'docker ps -aq\') do docker rm %%i'
     }
 }
         stage('Run Container') {
