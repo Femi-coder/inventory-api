@@ -37,8 +37,10 @@ pipeline {
 
         stage('Create Zip') {
             steps {
-                bat 'powershell Compress-Archive -Path * -DestinationPath complete-%DATE%-%TIME%.zip'
-            }
-        }
+                bat '''
+                powershell Compress-Archive -Path * -DestinationPath "complete-%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%.zip"
+        '''
+    }
+}
     }
 }
