@@ -22,16 +22,18 @@ pipeline {
         }
 
        stage('Run Tests') {
-    steps {
+            steps {
         bat 'npm install -g newman'
         bat 'cd tests && npx newman run postman_collection.json'
     }
 }
-        stage('Stop Container') {
+       stage('Stop Container') {
             steps {
-                bat 'docker ps -q | for /f %i in (\'more\') do docker stop %i'
-            }
-        }
+        bat '''
+        for /F "tokens=*" %%i in ('docker ps -q') do docker stop %%i
+        '''
+    }
+}
 
         stage('Create Zip') {
             steps {
