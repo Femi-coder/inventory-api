@@ -15,12 +15,12 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                bat 'cd tests && newman run postman_collection.json'
-            }
-        }
-
+       stage('Run Tests') {
+    steps {
+        bat 'npm install -g newman'
+        bat 'cd tests && newman run postman_collection.json'
+    }
+}
         stage('Stop Container') {
             steps {
                 bat 'docker ps -q | for /f %i in (\'more\') do docker stop %i'
