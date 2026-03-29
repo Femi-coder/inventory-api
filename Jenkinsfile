@@ -11,11 +11,10 @@ pipeline {
 
         stage('Clean Old Containers') {
             steps {
-                bat 'docker stop $(docker ps -q) || exit 0'
-                bat 'docker rm $(docker ps -aq) || exit 0'
+                bat 'for /f "tokens=*" %i in (\'docker ps -q\') do docker stop %i'
+                bat 'for /f "tokens=*" %i in (\'docker ps -aq\') do docker rm %i'
     }
 }
-
         stage('Run Container') {
             steps {
                 bat 'docker run -d -p 8000:8000 inventory-api'
