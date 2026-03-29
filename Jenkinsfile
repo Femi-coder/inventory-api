@@ -24,7 +24,7 @@ pipeline {
        stage('Run Tests') {
     steps {
         bat 'npm install -g newman'
-        bat 'cd tests && newman run postman_collection.json'
+        bat 'cd tests && npx newman run postman_collection.json'
     }
 }
         stage('Stop Container') {
